@@ -32,8 +32,12 @@ export default function GameSearch() {
       
       const data = await res.json();
       setGames(data.results || []);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError(String(err));
+      }
       setGames([]);
     } finally {
       setLoading(false);

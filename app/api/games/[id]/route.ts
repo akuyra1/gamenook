@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }  // ← Promise!
 ) {
-  const { id } = params;
+  const { id } = await params; // ← await it!
 
   try {
     const [gameRes, screenshotsRes] = await Promise.all([
@@ -19,10 +19,12 @@ export async function GET(
       screenshots: screenshotsRes.data.results,
     });
   } catch (error: any) {
-    console.error('Game detail error:', error.message);
+    console.error('Game detail error:', error.message || error);
+
+    const status = error.response?.status;
     return NextResponse.json(
       { error: 'Game not found or API error' },
-      { status: error.response?.status === 404 ? 404 : 500 }
+      { status: status === 404 ? 404 : 500 }
     );
   }
 }
