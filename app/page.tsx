@@ -1,27 +1,34 @@
-// import Image from "next/image";
+import Image from "next/image";
 import React from "react";
-
+import heroBg from '@/public/image (2).jpg'; // put your image in /public
 
 
 export default function Home() {
 
 
   return (
-    <div className="">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="fixed inset-0 w-full h-full object-cover -z-10"
-      >
-        <source src="/vid1.mp4" type="video/mp4" />
-      </video>
-      <h1 className="text-4xl font-bold">Welcome to Game Nook</h1>
-      <p className="mt-4 text-lg">
-        Your ultimate online database for all video games. Explore, discover,
-        and dive into the world of gaming with us!
-      </p>
+    <div className="main-container ">
+      <section className="relative min-h-screen w-screen overflow-hidden">
+        {/* Background image – covers everything, no gaps */}
+        <Image
+          src={heroBg}
+          alt="42 Games Later galaxy"
+          
+          fill
+          priority
+          quality={95}
+          className="object-cover object-center fixed inset-0"  // ← critical line
+          placeholder="blur"
+        />
+
+        {/* Optional dark overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+
+        {/* Your content */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-white">
+          {/* hero text, search bar, etc */}
+        </div>
+      </section>
     </div>
   );
 }
