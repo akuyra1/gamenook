@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import heroBg from '@/public/image (2).jpg'; // put your image in /public
 import '@/app/styles/mainPage.css'
+import GameSearch from '@/app/components/GameSearch';
 
 export default function mainPage() {
   return (
@@ -49,7 +50,7 @@ export default function mainPage() {
                 <Image src="/search.svg" alt="Search" width={35} height={35} className='search-image'/>
               </button>
             </form>
-            <div></div>            
+            <GameSearch />          
           </section>
         </div>
         <div className='intro-section'>
